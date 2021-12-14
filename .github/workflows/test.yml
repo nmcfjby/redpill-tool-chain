@@ -38,7 +38,7 @@ jobs:
         run: |
           ./redpill_tool_chain.sh build ${{matrix.platform}}-${{matrix.version}}
 
-      - name: 配置引导镜像
+      - name: 配置.引导镜像
         run: |
           cp sample_user_config.json ${{matrix.platform}}_user_config.json
           sed -i -e 's\0x0001\0x0002\g' -e 's\0x46f4\0x0002\g' -e 's\1234XXX123\1350PDN008843\g' -e 's\XXYYXXYYXXYY\00113267A6F\g' -e 's/00113267A6F"/&,\n\t"mac2": "00113267A5F",\n\t"netif_num": 2/' -e 's/"synoinfo": {},/"synoinfo": {\n\t"maxlanport": "2"\n    },/' ${{matrix.platform}}_user_config.json
